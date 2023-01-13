@@ -1,0 +1,6 @@
+CREATE TABLE url (
+    id SERIAL PRIMARY KEY NOT NULL,
+    full_url VARCHAR UNIQUE NOT NULL,
+    short_url VARCHAR UNIQUE NOT NULL,
+    site_id INTEGER NOT NULL REFERENCES site(id)
+);
