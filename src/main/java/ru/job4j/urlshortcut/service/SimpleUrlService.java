@@ -30,7 +30,6 @@ public class SimpleUrlService implements UrlService {
      */
     @Override
     public Url convert(String fullUrl) {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getName();
         Site site = siteService.findByLogin(
                 ((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal())
         );
