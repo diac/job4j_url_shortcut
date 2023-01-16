@@ -7,6 +7,9 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+/**
+ * Модель данных "URL"
+ */
 @Entity
 @Data
 @AllArgsConstructor
@@ -14,16 +17,28 @@ import javax.persistence.*;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Url {
 
+    /**
+     * Идентификатор URL
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    /**
+     * Полный (исходный) URL
+     */
     @Column(name = "full_url")
     private String fullUrl;
 
+    /**
+     * Сокращенный URL
+     */
     @Column(name = "short_url")
     private String shortUrl;
 
+    /**
+     * Сайт, которому принадлежит URL
+     */
     @ManyToOne
     @JoinColumn(name = "site_id")
     private Site site;
