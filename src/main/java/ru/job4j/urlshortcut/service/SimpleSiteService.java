@@ -39,7 +39,7 @@ public class SimpleSiteService implements SiteService {
         site.setDomainName(domainName);
         site.setLogin(domainName);
         char[] rawPassword = Passwords.generate();
-        site.setPassword(passwordEncoder.encode(CharBuffer.wrap(rawPassword)).toCharArray());
+        site.setPassword(passwordEncoder.encode(CharBuffer.wrap(rawPassword)));
         siteRepository.save(site);
         return new SiteDto(site.getDomainName(), site.getLogin(), rawPassword);
     }

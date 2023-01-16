@@ -39,5 +39,5 @@ public class Site {
     /**
      * Пароль сайта в системе
      */
-    private char[] password;
+    private String password;
 }
