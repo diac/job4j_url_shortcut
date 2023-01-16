@@ -7,6 +7,9 @@ import ru.job4j.urlshortcut.data.entity.Url;
 import ru.job4j.urlshortcut.data.repository.UrlRepository;
 import ru.job4j.urlshortcut.util.Urls;
 
+import javax.persistence.NoResultException;
+import java.util.Optional;
+
 /**
  * Сервис, реализующий логику, связанную с объектами Url
  */
@@ -42,7 +45,10 @@ public class SimpleUrlService implements UrlService {
      */
     @Override
     public String getFullUrlByShortUrl(String shortUrl) {
-        Url url = urlRepository.findByShortUrl(shortUrl);
-        return url.getFullUrl();
+        Optional<Url> url = urlRepository.findByShortUrl(shortUrl);
+        if (url.isEmpty()) {
+            throw new NoResultException();
+        }
+        return url.get().getFullUrl();
     }
 }

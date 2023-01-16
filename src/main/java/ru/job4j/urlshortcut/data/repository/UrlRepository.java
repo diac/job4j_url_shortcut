@@ -4,8 +4,10 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import ru.job4j.urlshortcut.data.entity.Url;
 
+import java.util.Optional;
+
 @Repository
 public interface UrlRepository extends CrudRepository<Url, Integer> {
 
-    Url findByShortUrl(String shortUrl);
+    Optional<Url> findByShortUrl(String shortUrl);
 }
