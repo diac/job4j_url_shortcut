@@ -31,11 +31,9 @@ public class SimpleUrlService implements UrlService {
     @Override
     public Url convert(String fullUrl) {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getName();
-        System.out.println(principal);
         Site site = siteService.findByLogin(
                 ((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal())
         );
-        System.out.println(site);
         Url url = urlRepository.save(new Url(0, fullUrl, "", site));
         url.setShortUrl(Urls.idToShortUrl(url.getId()));
         return urlRepository.save(url);

@@ -32,7 +32,6 @@ public class SiteController {
      */
     @PostMapping("/registration")
     public ResponseEntity<SiteDto> register(@RequestBody @Valid SiteRegistrationRequestDto requestDto) {
-        System.out.println(requestDto);
         return new ResponseEntity<>(
                 siteService.register(requestDto.getSite()),
                 HttpStatus.CREATED
