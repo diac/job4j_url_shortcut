@@ -40,4 +40,16 @@ public class SimpleUrlService implements UrlService {
         url.setShortUrl(Urls.idToShortUrl(url.getId()));
         return urlRepository.save(url);
     }
+
+    /**
+     * Получить полный URL по сокращенному URL
+     *
+     * @param shortUrl Сокращенный URL
+     * @return Полный URL
+     */
+    @Override
+    public String getFullUrlByShortUrl(String shortUrl) {
+        Url url = urlRepository.findByShortUrl(shortUrl);
+        return url.getFullUrl();
+    }
 }

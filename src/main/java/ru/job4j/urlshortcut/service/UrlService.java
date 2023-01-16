@@ -14,4 +14,12 @@ public interface UrlService {
      * @return Новый объект Url
      */
     Url convert(String fullUrl);
+
+    /**
+     * Получить полный URL по сокращенному URL
+     *
+     * @param shortUrl Сокращенный URL
+     * @return Полный URL
+     */
+    String getFullUrlByShortUrl(String shortUrl);
 }

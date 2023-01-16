@@ -6,4 +6,6 @@ import ru.job4j.urlshortcut.data.entity.Url;
 
 @Repository
 public interface UrlRepository extends CrudRepository<Url, Integer> {
+
+    Url findByShortUrl(String shortUrl);
 }
