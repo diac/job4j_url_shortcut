@@ -43,4 +43,15 @@ public class SimpleSiteService implements SiteService {
         siteRepository.save(site);
         return new SiteDto(site.getDomainName(), site.getLogin(), rawPassword);
     }
+
+    /**
+     * Найти сайт по его логину в системе
+     *
+     * @param login Логин сайта в системе
+     * @return Сайт
+     */
+    @Override
+    public Site findByLogin(String login) {
+        return siteRepository.findByLogin(login);
+    }
 }

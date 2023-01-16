@@ -1,8 +1,8 @@
 package ru.job4j.urlshortcut.service;
 
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import ru.job4j.urlshortcut.data.dto.UrlDto;
 import ru.job4j.urlshortcut.data.entity.Site;
 import ru.job4j.urlshortcut.data.entity.Url;
 import ru.job4j.urlshortcut.data.repository.UrlRepository;
@@ -20,17 +20,24 @@ public class SimpleUrlService implements UrlService {
      */
     private final UrlRepository urlRepository;
 
+    private final SiteService siteService;
+
     /**
      * Сконвертировать URL в сокращенный формат
      *
      * @param fullUrl Полный (исходный) URL
-     * @return Объект UrlDto, содержаний данные нового объекта Url
+     * @return Новый объект Url
      */
     @Override
-    public UrlDto convert(String fullUrl, Site site) {
-        Url url = urlRepository.save(new Url(0, fullUrl, null, site));
+    public Url convert(String fullUrl) {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getName();
+        System.out.println(principal);
+        Site site = siteService.findByLogin(
+                ((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal())
+        );
+        System.out.println(site);
+        Url url = urlRepository.save(new Url(0, fullUrl, "", site));
         url.setShortUrl(Urls.idToShortUrl(url.getId()));
-        urlRepository.save(url);
-        return new UrlDto(url.getFullUrl(), url.getShortUrl());
+        return urlRepository.save(url);
     }
 }
