@@ -1,5 +1,6 @@
 package ru.job4j.urlshortcut.service;
 
+import ru.job4j.urlshortcut.data.entity.Site;
 import ru.job4j.urlshortcut.data.entity.Url;
 
 /**
@@ -13,7 +14,7 @@ public interface UrlService {
      * @param fullUrl Полный (исходный) URL
      * @return Новый объект Url
      */
-    Url convert(String fullUrl);
+    Url convert(String fullUrl, Site site);
 
     /**
      * Получить полный URL по сокращенному URL

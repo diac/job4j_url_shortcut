@@ -1,7 +1,6 @@
 package ru.job4j.urlshortcut.service;
 
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import ru.job4j.urlshortcut.data.entity.Site;
 import ru.job4j.urlshortcut.data.entity.Url;
@@ -29,10 +28,7 @@ public class SimpleUrlService implements UrlService {
      * @return Новый объект Url
      */
     @Override
-    public Url convert(String fullUrl) {
-        Site site = siteService.findByLogin(
-                ((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal())
-        );
+    public Url convert(String fullUrl, Site site) {
         Url url = urlRepository.save(new Url(0, fullUrl, "", site));
         url.setShortUrl(Urls.idToShortUrl(url.getId()));
         return urlRepository.save(url);

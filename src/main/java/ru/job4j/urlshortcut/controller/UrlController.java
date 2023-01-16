@@ -3,10 +3,13 @@ package ru.job4j.urlshortcut.controller;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import ru.job4j.urlshortcut.data.dto.UrlConversionRequestDto;
 import ru.job4j.urlshortcut.data.dto.UrlConversionResponseDto;
+import ru.job4j.urlshortcut.data.entity.Site;
 import ru.job4j.urlshortcut.data.entity.Url;
+import ru.job4j.urlshortcut.service.SiteService;
 import ru.job4j.urlshortcut.service.UrlService;
 
 import javax.validation.Valid;
@@ -24,6 +27,11 @@ public class UrlController {
     private final UrlService urlService;
 
     /**
+     * Сервис, реализующий логику работы с объектами модели Site
+     */
+    private final SiteService siteService;
+
+    /**
      * Сконвертировать передаваемый URL в сокращенный формат
      *
      * @return DTO, содержащий данные сокращенного URL
@@ -32,7 +40,10 @@ public class UrlController {
     public ResponseEntity<UrlConversionResponseDto> convert(
             @RequestBody @Valid UrlConversionRequestDto requestDto
     ) {
-        Url url = urlService.convert(requestDto.getUrl());
+        Site site = siteService.findByLogin(
+                ((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal())
+        );
+        Url url = urlService.convert(requestDto.getUrl(), site);
         UrlConversionResponseDto responseDto = new UrlConversionResponseDto(url.getShortUrl());
         return new ResponseEntity<>(
                 responseDto,
