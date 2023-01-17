@@ -2,6 +2,7 @@ package ru.job4j.urlshortcut.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import ru.job4j.urlshortcut.data.dto.RedirectsStatRecordDto;
 import ru.job4j.urlshortcut.data.entity.RedirectsLog;
 import ru.job4j.urlshortcut.data.entity.Url;
 import ru.job4j.urlshortcut.data.repository.RedirectsLogRepository;
@@ -25,7 +26,7 @@ public class SimpleRedirectsLogService implements RedirectsLogService {
     /**
      * Зарегистрировать событие редиреркта
      *
-     * @param url URL, на который был осуществлен редирект
+     * @param url             URL, на который был осуществлен редирект
      * @param clientIpAddress IP адрес клиента, перешедшего по сокращенной ссылке
      * @return Сохраненная запись RedirectsLog
      */
@@ -40,13 +41,21 @@ public class SimpleRedirectsLogService implements RedirectsLogService {
 
     /**
      * Получить все записи статистики редиректов
+     *
      * @return Список всех записей статистики редиректов
      */
     @Override
     public List<RedirectsLog> findAll() {
-        List<RedirectsLog> redirectsLogs = new ArrayList<>();
-        redirectsLogRepository.findAll()
-                .forEach(redirectsLogs::add);
-        return redirectsLogs;
+        return new ArrayList<>(redirectsLogRepository.findAll());
+    }
+
+    /**
+     * Сгенерировать статистический отчет по количеству редиректов для каждого URL
+     *
+     * @return Перечень записей статистики редиректов
+     */
+    @Override
+    public List<RedirectsStatRecordDto> statistic() {
+        return redirectsLogRepository.statistic();
     }
 }
