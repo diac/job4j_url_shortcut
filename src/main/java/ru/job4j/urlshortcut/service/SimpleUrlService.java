@@ -51,4 +51,19 @@ public class SimpleUrlService implements UrlService {
         }
         return url.get().getFullUrl();
     }
+
+    /**
+     * Получить объект URL по сокращенному URL
+     *
+     * @param shortUrl Сокращенный URL
+     * @return Объект URL
+     */
+    @Override
+    public Url getByShortUrl(String shortUrl) {
+        Optional<Url> url = urlRepository.findByShortUrl(shortUrl);
+        if (url.isEmpty()) {
+            throw new NoResultException();
+        }
+        return url.get();
+    }
 }

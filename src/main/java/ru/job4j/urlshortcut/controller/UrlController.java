@@ -9,9 +9,11 @@ import ru.job4j.urlshortcut.data.dto.UrlConversionRequestDto;
 import ru.job4j.urlshortcut.data.dto.UrlConversionResponseDto;
 import ru.job4j.urlshortcut.data.entity.Site;
 import ru.job4j.urlshortcut.data.entity.Url;
+import ru.job4j.urlshortcut.service.RedirectsLogService;
 import ru.job4j.urlshortcut.service.SiteService;
 import ru.job4j.urlshortcut.service.UrlService;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 /**
@@ -30,6 +32,11 @@ public class UrlController {
      * Сервис, реализующий логику работы с объектами модели Site
      */
     private final SiteService siteService;
+
+    /**
+     * Сервис, реализующий логику, связанную с объектами модели RedirectsLog
+     */
+    private final RedirectsLogService redirectsLogService;
 
     /**
      * Сконвертировать передаваемый URL в сокращенный формат
@@ -52,9 +59,11 @@ public class UrlController {
     }
 
     @GetMapping("/redirect/{shortUrl}")
-    public ResponseEntity<String> redirect(@PathVariable String shortUrl) {
+    public ResponseEntity<String> redirect(@PathVariable String shortUrl, HttpServletRequest request) {
+        Url url = urlService.getByShortUrl(shortUrl);
+        redirectsLogService.register(url, request.getRemoteAddr());
         return new ResponseEntity<>(
-                urlService.getFullUrlByShortUrl(shortUrl),
+                url.getFullUrl(),
                 HttpStatus.FOUND
         );
     }
