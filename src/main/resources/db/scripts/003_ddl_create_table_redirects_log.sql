@@ -1,8 +1,8 @@
 CREATE TABLE redirects_log (
     id SERIAL PRIMARY KEY NOT NULL,
     url_id INTEGER NOT NULL REFERENCES url(id),
-    client_ip_address VARCHAR,
-    datetime TIMESTAMP
+    client_ip_address VARCHAR NOT NULL,
+    datetime TIMESTAMP NOT NULL
 );
 
 COMMENT ON TABLE redirects_log IS 'Статистика редиректов';
