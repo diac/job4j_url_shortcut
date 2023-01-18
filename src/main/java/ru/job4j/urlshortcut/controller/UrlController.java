@@ -3,7 +3,6 @@ package ru.job4j.urlshortcut.controller;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import ru.job4j.urlshortcut.data.dto.UrlConversionRequestDto;
 import ru.job4j.urlshortcut.data.dto.UrlConversionResponseDto;
@@ -15,6 +14,7 @@ import ru.job4j.urlshortcut.service.UrlService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.security.Principal;
 
 /**
  * Контроллер, реализующий доступ к объектам модели Url через REST
@@ -45,11 +45,10 @@ public class UrlController {
      */
     @PostMapping("/convert")
     public ResponseEntity<UrlConversionResponseDto> convert(
-            @RequestBody @Valid UrlConversionRequestDto requestDto
+            @RequestBody @Valid UrlConversionRequestDto requestDto,
+            Principal principal
     ) {
-        Site site = siteService.findByLogin(
-                ((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal())
-        );
+        Site site = siteService.findByLogin(principal.getName());
         Url url = urlService.convert(requestDto.getUrl(), site);
         UrlConversionResponseDto responseDto = new UrlConversionResponseDto(url.getShortUrl());
         return new ResponseEntity<>(
