@@ -11,6 +11,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import javax.persistence.NoResultException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -87,5 +88,25 @@ public class GlobalExceptionHandler {
         response.setStatus(HttpStatus.BAD_REQUEST.value());
         response.setContentType("application/json");
         response.getWriter().write(objectMapper.writeValueAsString(errors));
+    }
+
+    /**
+     * Метод, в котором осуществляется глобальная обработка исключения NoResultException
+     *
+     * @param e Обрабатываемое исключение
+     * @param response HTTP ответ, в который в случае выброса исключения добавляется информация об исключении
+     * @throws IOException В случае, если возникает ошибка записи в response
+     */
+    @ExceptionHandler(NoResultException.class)
+    public void handleNoResultException(NoResultException e, HttpServletResponse response) throws IOException {
+        response.setStatus(HttpStatus.NOT_FOUND.value());
+        response.setContentType("application/json");
+        response.getWriter().write(objectMapper.writeValueAsString(new HashMap<>() {
+            {
+                put("message", e.getMessage());
+                put("type", e.getClass());
+            }
+        }));
+        LOGGER.error(e.getLocalizedMessage());
     }
 }
