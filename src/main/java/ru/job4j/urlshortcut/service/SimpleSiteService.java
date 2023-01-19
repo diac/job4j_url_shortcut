@@ -3,9 +3,9 @@ package ru.job4j.urlshortcut.service;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import ru.job4j.urlshortcut.data.dto.SiteDto;
-import ru.job4j.urlshortcut.data.entity.Site;
-import ru.job4j.urlshortcut.data.repository.SiteRepository;
+import ru.job4j.urlshortcut.dto.SiteDto;
+import ru.job4j.urlshortcut.model.Site;
+import ru.job4j.urlshortcut.repository.SiteRepository;
 import ru.job4j.urlshortcut.util.Passwords;
 
 import java.nio.CharBuffer;

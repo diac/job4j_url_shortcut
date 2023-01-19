@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.DataIntegrityViolationException;
 import ru.job4j.urlshortcut.UrlShortcutApplication;
-import ru.job4j.urlshortcut.data.entity.RedirectsLog;
-import ru.job4j.urlshortcut.data.entity.Site;
-import ru.job4j.urlshortcut.data.entity.Url;
+import ru.job4j.urlshortcut.model.RedirectsLog;
+import ru.job4j.urlshortcut.model.Site;
+import ru.job4j.urlshortcut.model.Url;
 
 @SpringBootTest(classes = {UrlShortcutApplication.class})
 public class SimpleRedirectsLogServiceTest {

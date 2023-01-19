@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.DataIntegrityViolationException;
 import ru.job4j.urlshortcut.UrlShortcutApplication;
-import ru.job4j.urlshortcut.data.dto.SiteDto;
+import ru.job4j.urlshortcut.dto.SiteDto;
 
 import static org.assertj.core.api.Assertions.*;
 

@@ -14,7 +14,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 @Configuration
-@EnableJpaRepositories("ru.job4j.urlshortcut.data.repository")
+@EnableJpaRepositories("ru.job4j.urlshortcut.repository")
 @EnableTransactionManagement
 public class DataConfig {
 

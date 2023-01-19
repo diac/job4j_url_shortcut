@@ -2,9 +2,9 @@ package ru.job4j.urlshortcut.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.job4j.urlshortcut.data.entity.Site;
-import ru.job4j.urlshortcut.data.entity.Url;
-import ru.job4j.urlshortcut.data.repository.UrlRepository;
+import ru.job4j.urlshortcut.model.Site;
+import ru.job4j.urlshortcut.model.Url;
+import ru.job4j.urlshortcut.repository.UrlRepository;
 import ru.job4j.urlshortcut.util.Urls;
 
 import javax.persistence.NoResultException;

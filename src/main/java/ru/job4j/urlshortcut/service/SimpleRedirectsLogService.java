@@ -2,10 +2,10 @@ package ru.job4j.urlshortcut.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.job4j.urlshortcut.data.dto.RedirectsStatRecordDto;
-import ru.job4j.urlshortcut.data.entity.RedirectsLog;
-import ru.job4j.urlshortcut.data.entity.Url;
-import ru.job4j.urlshortcut.data.repository.RedirectsLogRepository;
+import ru.job4j.urlshortcut.dto.RedirectsStatRecordDto;
+import ru.job4j.urlshortcut.model.RedirectsLog;
+import ru.job4j.urlshortcut.model.Url;
+import ru.job4j.urlshortcut.repository.RedirectsLogRepository;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

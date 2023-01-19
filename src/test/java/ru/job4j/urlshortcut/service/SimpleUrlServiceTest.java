@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.DataIntegrityViolationException;
 import ru.job4j.urlshortcut.UrlShortcutApplication;
-import ru.job4j.urlshortcut.data.entity.Site;
-import ru.job4j.urlshortcut.data.entity.Url;
+import ru.job4j.urlshortcut.model.Site;
+import ru.job4j.urlshortcut.model.Url;
 import ru.job4j.urlshortcut.util.Urls;
 
 import javax.persistence.NoResultException;

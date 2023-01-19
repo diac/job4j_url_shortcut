@@ -1,10 +1,10 @@
-package ru.job4j.urlshortcut.data.repository;
+package ru.job4j.urlshortcut.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import ru.job4j.urlshortcut.data.dto.RedirectsStatRecordDto;
-import ru.job4j.urlshortcut.data.entity.RedirectsLog;
+import ru.job4j.urlshortcut.dto.RedirectsStatRecordDto;
+import ru.job4j.urlshortcut.model.RedirectsLog;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ public interface RedirectsLogRepository extends JpaRepository<RedirectsLog, Inte
 
     @Query("""            
             SELECT
-                new ru.job4j.urlshortcut.data.dto.RedirectsStatRecordDto(
+                new ru.job4j.urlshortcut.dto.RedirectsStatRecordDto(
                     rl.url.fullUrl,
             	    COUNT(rl)
                 )

@@ -1,7 +1,7 @@
 package ru.job4j.urlshortcut.service;
 
-import ru.job4j.urlshortcut.data.entity.Site;
-import ru.job4j.urlshortcut.data.entity.Url;
+import ru.job4j.urlshortcut.model.Site;
+import ru.job4j.urlshortcut.model.Url;
 
 /**
  * Сервис, реализующий логику, связанную с объектами Url

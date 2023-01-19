@@ -6,8 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import ru.job4j.urlshortcut.data.dto.SiteDto;
-import ru.job4j.urlshortcut.data.dto.SiteRegistrationRequestDto;
+import ru.job4j.urlshortcut.dto.SiteDto;
+import ru.job4j.urlshortcut.dto.SiteRegistrationRequestDto;
 import ru.job4j.urlshortcut.service.SiteService;
 
 import javax.validation.Valid;

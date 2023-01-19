@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.job4j.urlshortcut.data.dto.RedirectsStatRecordDto;
+import ru.job4j.urlshortcut.dto.RedirectsStatRecordDto;
 import ru.job4j.urlshortcut.service.RedirectsLogService;
 
 import java.util.List;

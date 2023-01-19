@@ -1,8 +1,8 @@
 package ru.job4j.urlshortcut.service;
 
-import ru.job4j.urlshortcut.data.dto.RedirectsStatRecordDto;
-import ru.job4j.urlshortcut.data.entity.RedirectsLog;
-import ru.job4j.urlshortcut.data.entity.Url;
+import ru.job4j.urlshortcut.dto.RedirectsStatRecordDto;
+import ru.job4j.urlshortcut.model.RedirectsLog;
+import ru.job4j.urlshortcut.model.Url;
 
 import java.util.List;
 
