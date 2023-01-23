@@ -62,7 +62,7 @@ public class GlobalExceptionHandler {
                 put("type", e.getClass());
             }
         }));
-        LOGGER.error(e.getLocalizedMessage());
+        LOGGER.error(e.getLocalizedMessage(), e);
     }
 
     /**
@@ -83,7 +83,7 @@ public class GlobalExceptionHandler {
                     ((FieldError) error).getField(),
                     error.getDefaultMessage()
             );
-            LOGGER.error(e.getLocalizedMessage());
+            LOGGER.error(e.getLocalizedMessage(), e);
         });
         response.setStatus(HttpStatus.BAD_REQUEST.value());
         response.setContentType("application/json");
@@ -107,6 +107,6 @@ public class GlobalExceptionHandler {
                 put("type", e.getClass());
             }
         }));
-        LOGGER.error(e.getLocalizedMessage());
+        LOGGER.error(e.getLocalizedMessage(), e);
     }
 }
