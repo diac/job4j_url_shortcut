@@ -9,7 +9,9 @@ import ru.job4j.urlshortcut.repository.RedirectsLogRepository;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Сервис, реализующий логику, связанную с объектами модели RedirectsLog
@@ -56,6 +58,18 @@ public class SimpleRedirectsLogService implements RedirectsLogService {
      */
     @Override
     public List<RedirectsStatRecordDto> statistic() {
-        return redirectsLogRepository.statistic();
+        List<RedirectsLog> redirectsLogs = redirectsLogRepository.findAll();
+        Map<Url, Integer> resultMap = new HashMap<>();
+        redirectsLogs.forEach(redirectsLog -> {
+            resultMap.putIfAbsent(redirectsLog.getUrl(), 0);
+            resultMap.put(redirectsLog.getUrl(), resultMap.get(redirectsLog.getUrl()) + 1);
+        });
+        return resultMap.entrySet().stream()
+                .map(resultMapEntry ->
+                        new RedirectsStatRecordDto(
+                                resultMapEntry.getKey().getFullUrl(),
+                                resultMapEntry.getValue()
+                        )
+                ).toList();
     }
 }
