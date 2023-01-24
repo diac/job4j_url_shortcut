@@ -41,7 +41,7 @@ public class SimpleRedirectsLogServiceTest {
     private PasswordEncoder passwordEncoder;
 
     @BeforeEach
-    private void init() {
+    public void init() {
         redirectsLogService = new SimpleRedirectsLogService(redirectsLogRepository);
         siteService = new SimpleSiteService(siteRepository, passwordEncoder);
         urlService = new SimpleUrlService(urlRepository, siteService);
@@ -53,7 +53,7 @@ public class SimpleRedirectsLogServiceTest {
         Site site = siteService.findByLogin(siteService.register(value).getLogin());
         Url url = new Url(1, value, Urls.idToShortUrl(1), site);
         RedirectsLog redirectsLog = new RedirectsLog(0, value, LocalDateTime.now(), url);
-        Mockito.when(urlRepository.save(url)).thenReturn(url);
+        Mockito.when(urlRepository.save(new Url(0, value, "", site))).thenReturn(url);
         Mockito.when(redirectsLogRepository.save(redirectsLog)).thenReturn(redirectsLog);
         Mockito.when(redirectsLogRepository.findAll()).thenReturn(List.of(redirectsLog));
         Url storedUrl = urlService.convert(value, site);

@@ -56,14 +56,17 @@ public class SimpleUrlServiceTest {
     public void whenGetFullUrlByShortUrl() {
         String value = String.valueOf(System.currentTimeMillis());
         Site site = new Site(0, value, value, value);
-        Url url = new Url(1, value, Urls.idToShortUrl(1), site);
+        Url initUrl = new Url(0, value, "", site);
+        Url savedUrl = new Url(1, value, "", site);
+        Url shortenedUrl = new Url(1, value, Urls.idToShortUrl(1), site);
         Mockito.when(siteRepository.save(site)).thenReturn(site);
         Mockito.when(siteRepository.findByLogin(value)).thenReturn(site);
-        Mockito.when(urlRepository.save(url)).thenReturn(url);
-        Mockito.when(urlRepository.findByShortUrl(url.getShortUrl())).thenReturn(Optional.of(url));
+        Mockito.when(urlRepository.save(initUrl)).thenReturn(savedUrl);
+        Mockito.when(urlRepository.save(shortenedUrl)).thenReturn(shortenedUrl);
+        Mockito.when(urlRepository.findByShortUrl(shortenedUrl.getShortUrl())).thenReturn(Optional.of(shortenedUrl));
         Site storedSite = siteService.findByLogin(siteService.register(value).getLogin());
-        Url storedUrl = urlService.convert(value, storedSite);
-        String fullUrl = urlService.getFullUrlByShortUrl(storedUrl.getShortUrl());
+        Url expectedUrl = urlService.convert(value, storedSite);
+        String fullUrl = urlService.getFullUrlByShortUrl(expectedUrl.getShortUrl());
         assertThat(fullUrl).isEqualTo(value);
     }
 }
