@@ -2,7 +2,7 @@ CREATE TABLE site (
     id SERIAL PRIMARY KEY NOT NULL,
     domain_name VARCHAR UNIQUE NOT NULL,
     login VARCHAR UNIQUE NOT NULL,
-    password VARCHAR UNIQUE NOT NULL
+    password VARCHAR NOT NULL
 );
 
 COMMENT ON TABLE site IS 'Сайты, зарегистрированные в системе';
