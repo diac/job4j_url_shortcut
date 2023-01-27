@@ -8,7 +8,6 @@ import ru.job4j.urlshortcut.model.Url;
 import ru.job4j.urlshortcut.repository.RedirectsLogRepository;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,7 +47,7 @@ public class SimpleRedirectsLogService implements RedirectsLogService {
      */
     @Override
     public List<RedirectsLog> findAll() {
-        return new ArrayList<>(redirectsLogRepository.findAll());
+        return redirectsLogRepository.findAll();
     }
 
     /**
