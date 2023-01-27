@@ -56,7 +56,7 @@ public class SimpleRedirectsLogService implements RedirectsLogService {
      * @return Перечень записей статистики редиректов
      */
     @Override
-    public List<RedirectsStatRecordDto> statistic() {
+    public List<RedirectsStatRecordDto> getStatistics() {
         List<RedirectsLog> redirectsLogs = redirectsLogRepository.findAll();
         Map<Url, Integer> resultMap = new HashMap<>();
         redirectsLogs.forEach(redirectsLog -> {

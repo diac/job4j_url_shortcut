@@ -32,5 +32,5 @@ public interface RedirectsLogService {
      *
      * @return Перечень записей статистики редиректов
      */
-    List<RedirectsStatRecordDto> statistic();
+    List<RedirectsStatRecordDto> getStatistics();
 }

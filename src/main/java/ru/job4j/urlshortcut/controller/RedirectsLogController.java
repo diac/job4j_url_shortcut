@@ -28,9 +28,9 @@ public class RedirectsLogController {
      * @return Перечень записей статистики редиректов
      */
     @GetMapping("/statistic")
-    public ResponseEntity<List<RedirectsStatRecordDto>> statistic() {
+    public ResponseEntity<List<RedirectsStatRecordDto>> getStatistics() {
         return new ResponseEntity<>(
-                redirectsLogService.statistic(),
+                redirectsLogService.getStatistics(),
                 HttpStatus.OK
         );
     }
