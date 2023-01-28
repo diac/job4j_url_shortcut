@@ -71,7 +71,7 @@ public class SimpleUrlServiceTest {
         Mockito.when(urlRepository.findByShortUrl(shortenedUrl.getShortUrl())).thenReturn(Optional.of(shortenedUrl));
         Site storedSite = siteService.findByLogin(siteService.register(value).getLogin());
         Url expectedUrl = urlService.convert(value, storedSite);
-        String fullUrl = urlService.getFullUrlByShortUrl(expectedUrl.getShortUrl());
+        String fullUrl = urlService.getByShortUrl(expectedUrl.getShortUrl()).get().getFullUrl();
         assertThat(fullUrl).isEqualTo(value);
     }
 }

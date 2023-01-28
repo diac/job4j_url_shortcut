@@ -12,9 +12,11 @@ import ru.job4j.urlshortcut.service.RedirectsLogService;
 import ru.job4j.urlshortcut.service.SiteService;
 import ru.job4j.urlshortcut.service.UrlService;
 
+import javax.persistence.NoResultException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.Optional;
 
 /**
  * Контроллер, реализующий доступ к объектам модели Url через REST
@@ -59,10 +61,13 @@ public class UrlController {
 
     @GetMapping("/redirect/{shortUrl}")
     public ResponseEntity<String> redirect(@PathVariable String shortUrl, HttpServletRequest request) {
-        Url url = urlService.getByShortUrl(shortUrl);
-        redirectsLogService.register(url, request.getRemoteAddr());
+        Optional<Url> url = urlService.getByShortUrl(shortUrl);
+        if (url.isEmpty()) {
+            throw new NoResultException();
+        }
+        redirectsLogService.register(url.get(), request.getRemoteAddr());
         return new ResponseEntity<>(
-                url.getFullUrl(),
+                url.get().getFullUrl(),
                 HttpStatus.FOUND
         );
     }

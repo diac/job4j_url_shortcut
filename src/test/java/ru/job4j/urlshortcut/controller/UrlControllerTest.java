@@ -20,6 +20,7 @@ import ru.job4j.urlshortcut.service.UrlService;
 
 import javax.persistence.NoResultException;
 import java.security.Principal;
+import java.util.Optional;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -92,7 +93,7 @@ public class UrlControllerTest {
     @Test
     public void whenRedirectThenStatusIsFound() throws Exception {
         String value = String.valueOf(System.currentTimeMillis());
-        Mockito.when(urlService.getByShortUrl(value)).thenReturn(new Url());
+        Mockito.when(urlService.getByShortUrl(value)).thenReturn(Optional.of(new Url()));
         String requestUrl = String.format("/redirect/%s", value);
         mockMvc.perform(get(requestUrl))
                 .andExpect(status().isFound());

@@ -3,6 +3,8 @@ package ru.job4j.urlshortcut.service;
 import ru.job4j.urlshortcut.model.Site;
 import ru.job4j.urlshortcut.model.Url;
 
+import java.util.Optional;
+
 /**
  * Сервис, реализующий логику, связанную с объектами Url
  */
@@ -17,18 +19,10 @@ public interface UrlService {
     Url convert(String fullUrl, Site site);
 
     /**
-     * Получить полный URL по сокращенному URL
-     *
-     * @param shortUrl Сокращенный URL
-     * @return Полный URL
-     */
-    String getFullUrlByShortUrl(String shortUrl);
-
-    /**
      * Получить объект URL по сокращенному URL
      *
      * @param shortUrl Сокращенный URL
-     * @return Объект URL
+     * @return Optional объекта URL
      */
-    Url getByShortUrl(String shortUrl);
+    Optional<Url> getByShortUrl(String shortUrl);
 }
