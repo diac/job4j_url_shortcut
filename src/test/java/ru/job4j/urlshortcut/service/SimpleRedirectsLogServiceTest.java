@@ -14,6 +14,7 @@ import ru.job4j.urlshortcut.model.Url;
 import ru.job4j.urlshortcut.repository.RedirectsLogRepository;
 import ru.job4j.urlshortcut.repository.SiteRepository;
 import ru.job4j.urlshortcut.repository.UrlRepository;
+import ru.job4j.urlshortcut.util.StringGenerator;
 import ru.job4j.urlshortcut.util.Urls;
 
 import java.time.LocalDateTime;
@@ -40,11 +41,15 @@ public class SimpleRedirectsLogServiceTest {
     @Mock
     private PasswordEncoder passwordEncoder;
 
+    @Mock
+    private StringGenerator stringGenerator;
+
     @BeforeEach
     public void init() {
         redirectsLogService = new SimpleRedirectsLogService(redirectsLogRepository);
-        siteService = new SimpleSiteService(siteRepository, passwordEncoder);
+        siteService = new SimpleSiteService(siteRepository, passwordEncoder, stringGenerator);
         urlService = new SimpleUrlService(urlRepository, siteService);
+        Mockito.when(stringGenerator.generate()).thenReturn(String.valueOf(System.currentTimeMillis()).toCharArray());
     }
 
     @Test

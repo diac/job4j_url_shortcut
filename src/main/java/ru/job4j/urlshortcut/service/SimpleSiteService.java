@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import ru.job4j.urlshortcut.dto.SiteDto;
 import ru.job4j.urlshortcut.model.Site;
 import ru.job4j.urlshortcut.repository.SiteRepository;
-import ru.job4j.urlshortcut.util.Passwords;
+import ru.job4j.urlshortcut.util.StringGenerator;
 
 import java.nio.CharBuffer;
 
@@ -28,6 +28,11 @@ public class SimpleSiteService implements SiteService {
     private final PasswordEncoder passwordEncoder;
 
     /**
+     * Генератор строк
+     */
+    private final StringGenerator stringGenerator;
+
+    /**
      * Зарегистрировать сайт в системе по доменному имени
      *
      * @param domainName Доменное имя регистрируемого сайта
@@ -38,7 +43,7 @@ public class SimpleSiteService implements SiteService {
         Site site = new Site();
         site.setDomainName(domainName);
         site.setLogin(domainName);
-        char[] rawPassword = Passwords.generate();
+        char[] rawPassword = stringGenerator.generate();
         site.setPassword(passwordEncoder.encode(CharBuffer.wrap(rawPassword)));
         siteRepository.save(site);
         return new SiteDto(site.getDomainName(), site.getLogin(), rawPassword);
